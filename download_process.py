@@ -158,6 +158,6 @@ if __name__ == "__main__":
     logger.info(f'Download {len(filenames[:size])} files. Be patient, this will take a long time.')
 
     # init ray
-    ray.init(num_cpus=cpu_count())
+    ray.init(num_cpus=4)
     workers = [download_and_process.remote(fn, data_dir) for fn in filenames[:size]]
     _ = ray.get(workers)
