@@ -4,6 +4,8 @@ import time
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
+import matplotlib
+matplotlib.use('Agg')
 from matplotlib import animation
 
 from object_detection.builders.dataset_builder import build as build_dataset
@@ -43,7 +45,6 @@ def main(labelmap_path, model_path, tf_record_path, config_path, output_path):
 
     # update the eval config file
     eval_input_config.tf_record_input_reader.input_path[:] = [tf_record_path]
-    dataset = build_dataset(eval_input_config)
 
     # build dataset
     dataset = build_dataset(eval_input_config)
@@ -93,8 +94,9 @@ def main(labelmap_path, model_path, tf_record_path, config_path, output_path):
     def animate(idx):
         image = images[idx]
         im_obj.set_data(image)
+        return idx
 
-    anim = animation.FuncAnimation(f, animate, frames=len(images))
+    anim = animation.FuncAnimation(f, animate, frames=[i for i in range(len(images))], save_count=4000)
     anim.save(output_path, fps=5, dpi=300)
 
 
