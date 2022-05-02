@@ -8,8 +8,6 @@ Check out [vid](experiments/rcnnAug2/videos/animationTest.mp4) to see the final 
 ### Set up
 Create a docker container by following the instructions from the [README](build/README.md) in the build folder.
 
-In order to detect and identify images with this projects model, use tf.saved_model.load(<PATH>)
-to load the model. Then pass it a 640x640 image. See [Example.ipynb](Example.ipynb) for details.
 ### Dataset
 #### Dataset analysis
 The dataset being used contains 100 tfrecords, with a total of 1997 images. These images contain a total of 35673 
@@ -54,3 +52,9 @@ Below is a comparison between the reference model and improved model:
 ![ref image](images/refImage.png)
 ##### Improved
 ![imp image](images/impImage.png)
+
+### Conclusion
+The model became reasonably good at detecting and classifying both pedestrians and vehicles. However, there were so few cyclists in the 
+data that the model never began to detect them. In order to address this, we would need to train the model with more images with more
+cyclists. However, regardless of how many images we could train on, it is unlikely that computer vision alone would be sufficient for object detection in an
+autonomous vehicle.
