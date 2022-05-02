@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
 import matplotlib
-matplotlib.use('Agg')
 from matplotlib import animation
+matplotlib.use('Agg')
 
 from object_detection.builders.dataset_builder import build as build_dataset
 from object_detection.utils.config_util import get_configs_from_pipeline_file

@@ -1,12 +1,8 @@
 import argparse
-import glob
 import os
 import random
-import shutil
-import numpy as np
 from os import listdir
 from os.path import isfile, join
-#from utils import get_module_logger
 
 
 def split(source, destination):
@@ -19,7 +15,6 @@ def split(source, destination):
         - destination [str]: destination data directory, contains 3 sub folders: train / val / test
     """
     fnames = [f for f in listdir(source) if isfile(join(source, f)) and len(f)>9 and f[-9:] == '.tfrecord']
-    destinationFiles = [destination+'/'+f for f in fnames]
     random.shuffle(fnames)
     train_num = (len(fnames)*17)//20
     val_num = len(fnames)//10
@@ -32,7 +27,6 @@ def split(source, destination):
             os.rename(source + '/' + f, destination + '/test/' + f)
 
 if __name__ == "__main__":
-    #split('data/processed', 'data')
 
     parser = argparse.ArgumentParser(description='Split data into training / validation / testing')
     parser.add_argument('--source', required=True,
@@ -41,6 +35,4 @@ if __name__ == "__main__":
                         help='destination data directory')
     args = parser.parse_args()
 
-    logger = get_module_logger(__name__)
-    logger.info('Creating splits...')
     split(args.source, args.destination)
